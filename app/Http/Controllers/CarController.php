@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Car;
+use DB;
 
 class CarController extends Controller
 {
     public function index()
-    {
-        return Car::all();
+    { 
+        return DB::table('cars')->skip(5)->take(10)->get();
     }
 
     public function create()
