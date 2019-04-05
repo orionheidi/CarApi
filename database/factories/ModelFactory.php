@@ -26,14 +26,15 @@ use App\Car;
 //     ];
 // });
 
-$factory->define(Car::class, function(Faker $faker){       //uvek je drugi parametar callback i uvek vraca asocijativni niz gde je key naziv atributa
+$factory->define(Car::class, function(Faker $faker){ 
+    $faker->addProvider(new \Faker\Provider\Fakecar($faker));
     return[
-        "brend" => $faker->name,
-        "model" => $faker->imageUrl($width = 640, $height = 480) ,
+        "brand" => $faker->vehicleBrand,
+        "model" => $faker->vehicleModel,
         "year" => $faker->numberBetween($min = 2010, $max = 2019),
-        "maxSpeed" => $faker->numberBetween($min = 200, $max = 400),
-        "isAutomatic" => Movie::GENERES[rand(0,count(Movie::GENERES) - 1)],
-        "engine" => Movie::GENERES[rand(0,count(Movie::GENERES) - 1)],
-        "numberOfDoors" => Movie::GENERES[rand(0,count(Movie::GENERES) - 1)]
+        "maxSpeed" => $faker->numberBetween($min = 150, $max = 400),
+        "isAutomatic" =>$faker->boolean,
+        "engine" =>$faker->vehicleFuelType,
+        "numberOfDoor" =>$faker->vehicleDoorCount,
     ];
  });
